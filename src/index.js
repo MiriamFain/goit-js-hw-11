@@ -47,16 +47,16 @@ function fetchImages() {
       loadMoreBtn.show();
       onPageScrolling();
       lightbox.refresh();
-      const { totalHits } = data;
+      const { total } = data;
 
-      if (data.hits.length === 0) {
+      if ((fetchImagesApi.page - 1) * 40 > data.total) {
         Notify.info(
           `We're sorry, but you've reached the end of search results.`
         );
         loadMoreBtn.hide();
       } else {
         loadMoreBtn.enable();
-        Notify.success(`Hooray! We found ${totalHits} images.`);
+        Notify.success(`Hooray! We found ${total} images.`);
       }
     })
     .catch(handleError);
